@@ -1,12 +1,11 @@
+<div style="margin: auto; margin-top: 2%; width:30%; text-align: center; padding: 5%;">
+  <mat-select placeholder="Choose chart type"  (selectionChange)="onChange($event)">
+    <mat-option *ngFor="let c of charts" [value]="c.id">{{c.chartType}}</mat-option>
+  </mat-select>
+</div>
+
 <mat-card [class.mat-elevation-z15]="isActive" style="margin: auto; margin-top: 2%; width:60%; text-align: center">
-  <fusioncharts
-  type="column2d"
-  width="700"
-  height="400"
-  dataFormat="json"
-  [dataSource]="dataSource"
-  (initialized)="initialized($event)">
-</fusioncharts>
+  <router-outlet></router-outlet>
 </mat-card>
                         
                     
