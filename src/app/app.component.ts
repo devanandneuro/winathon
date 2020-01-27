@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
         this.chartInstance = e.chart; 
 
         this.chartInstance.configureLink({
-            type: "column2d",
+            type: "stackedcolumn2d",
             overlayButton: {
                 message: 'close',
                 fontColor: '880000',
@@ -41,7 +41,8 @@ export class AppComponent implements OnInit{
             "theme": "fusion",
             "showValues": "1"
         },
-        "data": [{
+        "data": [
+            {
                 "label": "October",
                 "value": "154",
                 "link": "newchart-xml-oct"
@@ -69,23 +70,69 @@ export class AppComponent implements OnInit{
                         "showValues": "1"
 
                     },
-                    "data": [{
-                        "label": "Order Validation",
-                        "value": "24"
-                    }, {
-                        "label": "Provisioning",
-                        "value": "35"
-                    }, {
-                        "label": "Testing",
-                        "value": "17"
-                    }, {
-                        "label": "Activation",
-                        "value": "21"
-                    },{
-                      "label": "Billing",
-                      "value": "13"
-                  }
-                  ]
+                    "categories": [
+                        {
+                            "category": [
+                                {
+                                    "label": "Order Validation"
+                                },
+                                {
+                                    "label": "Provisioning"
+                                },
+                                {
+                                    "label": "Testing"
+                                },
+                                {
+                                    "label": "Activation"
+                                },
+                                {
+                                    "label": "Billing"
+                                }
+                            ]
+                        }
+                    ],
+                    "dataset": [
+                        {
+                            "seriesname": "Days took to complete",
+                            "data": [
+                                {
+                                    "value": "21"
+                                },
+                                {
+                                    "value": "35"
+                                },
+                                {
+                                    "value": "15"
+                                },
+                                {
+                                    "value": "20"
+                                },
+                                {
+                                    "value": "13"
+                                }
+                            ]
+                        },
+                        {
+                            "seriesname": "Actual days",
+                            "data": [
+                                {
+                                    "value": "18"
+                                },
+                                {
+                                    "value": "30"
+                                },
+                                {
+                                    "value": "18"
+                                },
+                                {
+                                    "value": "15"
+                                },
+                                {
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    ]
                 }
             },
             {
