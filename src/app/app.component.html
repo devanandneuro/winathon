@@ -5,7 +5,15 @@
 </div>
 
 <mat-card [class.mat-elevation-z15]="isActive" style="margin: auto; margin-top: 2%; width:60%; text-align: center">
-  <router-outlet></router-outlet>
+  <fusioncharts *ngIf="ifChartSelected"
+  [type]="charttype"
+  width="700"
+  height="400"
+  dataFormat="json"
+  [dataSource]="datasource"
+  dataEmptyMessage="Chart is not compatible for the data"
+  (ready)="eventtype($event)">
+  </fusioncharts>
 </mat-card>
                         
                     
