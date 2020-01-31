@@ -1,0 +1,29 @@
+<diV class="imageset">
+  <!---->
+  <mat-card [class.mat-elevation-z10]="true" class="central-dev">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <p>
+          <mat-form-field appearance="outline" style="width: 100%;" >
+            <mat-label style="color: white;">Enter your username</mat-label>
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" style="width: 100%;" >
+            <mat-label style="color: white;">Enter your password</mat-label>
+            <input matInput type="password" placeholder="Password" formControlName="password">
+          </mat-form-field>
+        </p>
+        <p *ngIf="invalidCred" style="color: white;">Invalid Credentials!</p>
+        <p>
+          <button type="submit" [disabled]="!loginForm.valid" style="border:1px solid white; background-color: transparent;;color: white;width: 35%;padding: 1%;border-radius: 30px; font-size: 16px;" mat-button>SIGN IN</button>
+        </p>
+      </form>
+  </mat-card >
+                            
+  <!---->
+  <div class="footer" style="background-color: #272829;height: 8%;">
+     <p style="background:-webkit-linear-gradient(#7b4397  , #dc2430); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 90%; font-style: italic; font-weight: bold">Powered by Tech Lunatics</p>
+  </div>
+</diV>
+

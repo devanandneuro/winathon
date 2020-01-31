@@ -14,17 +14,34 @@ import * as charts from 'fusioncharts/fusioncharts.charts';
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { FirstPageComponent } from './first-page/first-page.component';
+import { AuthGuard } from './service/auth.guard';
+import { LoginService } from './service/login.service';
 
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 
 const appRoutes: Routes = [
-
+  { path: '', redirectTo:'/start-page',  pathMatch: 'full'},
+  { path: 'start-page', component: FirstPageComponent,
+    canActivate:[AuthGuard],
+    children:[
+      { path: '' , component: MainPageComponent },
+    ]},
+  { path: 'app-login' , component: LoginComponent }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    MainPageComponent,
+    FirstPageComponent,
 
   ],
   imports: [
@@ -34,12 +51,16 @@ const appRoutes: Routes = [
     MaterialModule,
     FusionChartsModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     MaterialModule,
-    FusionChartsModule
+    FusionChartsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe,LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
