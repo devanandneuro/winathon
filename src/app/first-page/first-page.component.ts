@@ -9,6 +9,7 @@ import { LoginService } from '../service/login.service';
 export class FirstPageComponent implements OnInit {
 
   constructor(private loginservice: LoginService) { 
+    
     if(Boolean(localStorage.getItem('isUserLoggedIn'))){
       this.loginservice.LogoutVisible(true);
 

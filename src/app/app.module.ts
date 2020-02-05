@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './app.material';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { FusionChartsModule } from 'angular-fusioncharts';
 
@@ -53,7 +54,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
+    NgbModule.forRoot()
   ],
   exports:[
     MaterialModule,

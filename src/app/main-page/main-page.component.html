@@ -1,40 +1,35 @@
-<div>
-  <table>
-     <tbody>
-        <li *ngFor="let item of testData">  
-           {{item.doc_num}}, {{item.task_type}}, {{item.compl_dt}}         
-        </li>
-     </tbody>
-  </table>
-</div>
-<div>
-  <mat-card [class.mat-elevation-z15]="isActive" style="margin: auto; margin-top: 2%; width:80%; text-align: center">
 
-    <div style="margin: auto; margin-top: 2%; width:70%; text-align: center; padding: 5%;">
-      <form [formGroup]="inputForm" (ngSubmit)="onFormSubmit()">
-      <mat-form-field class="full-width-field">
+<div style="background-image:linear-gradient(#56ab2f   , #a8e063); padding-top: 2%; padding-bottom: 5%;">
+  <mat-card [class.mat-elevation-z15]="isActive" style="margin: auto; width:80%; text-align: center; align-content: center; padding-bottom: 5%;">
+
+    <div style="margin: auto; margin-top: 5%; width:70%; text-align: center; padding: 5%; border: 1px solid #000; border-radius: 25px;">
+      <h1 style="margin-top: -10%;line-height: 20px;font-size: 35px;text-align: center;">
+        <span style="background-color:white; padding-left: 1%; padding-right: 1%;">Feed Data</span>
+      </h1>
+      <form style="padding-top: 5%;"  [formGroup]="inputForm" (ngSubmit)="onFormSubmit()">
+     
+        <mat-form-field class="full-width-field">
          <mat-select placeholder="Choose your product"
             formControlName="spec_grp_id">
             <mat-option *ngFor="let p of products" [value]="p.id">{{p.name}}</mat-option>
          </mat-select>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        
-        <input matInput [matDatepicker]="picker1" placeholder="From Date" formControlName="from_time">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-    
-    </mat-form-field>
-      <br>
-      <mat-form-field>
-        
-        <input matInput [matDatepicker]="picker2" placeholder="To Date" formControlName="to_time">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-    
-    </mat-form-field>
-      <br>
+        </mat-form-field>
+      
+      <br><br>
+      <mat-form-field class="full-width-field">
+        <mat-select placeholder="Choose start date"
+           formControlName="from_time" (selectionChange)="onChange($event)">
+           <mat-option *ngFor="let p of durDropDown" [value]="p.id">{{p.displayDate}}</mat-option>
+        </mat-select>
+       </mat-form-field>
+      <br><br>
+      <mat-form-field class="full-width-field">
+        <mat-select placeholder="Choose end date"
+           formControlName="to_time">
+           <mat-option *ngFor="let p of currEndDate" [value]="p.id">{{p.displayDate}}</mat-option>
+        </mat-select>
+       </mat-form-field>
+      <br><br>
       <button
          mat-raised-button 
          type="submit"
@@ -43,27 +38,72 @@
       </button>
       </form>
     </div>
-    <div style="margin: auto; margin-top: 2%; width:30%; text-align: center; padding: 5%;">
-      <mat-select placeholder="Choose chart type"  (selectionChange)="onChange($event)">
-         <mat-option *ngFor="let c of charts" [value]="c.id">{{c.chartType}}</mat-option>
-      </mat-select>
-    </div>
-    <mat-card style="margin: auto; margin-top: 2%; width:60%; text-align: center">
-      <fusioncharts *ngIf="ifChartSelected; else showDescription"
-      [type]="charttype"
-      width="700"
-      height="400"
-      dataFormat="json"
-      [dataSource]="datasource"
-      dataEmptyMessage="Chart is not compatible for the data"
-      (ready)="eventtype($event)">
-      </fusioncharts>
-      <ng-template #showDescription >
-        <div style="font-size: 10px; margin: 2%;">
-          <p>Chart will be displayed here</p>
-        </div>
-      </ng-template >
-    </mat-card>
 
+      <mat-spinner *ngIf="isSpinnerOn" style="margin: auto; margin-top: 4%; width:80%; text-align: center; padding-bottom: 2%;"></mat-spinner>
+    
+
+<div *ngIf="ifFormFilled" style="border: 1px solid #000; border-radius: 25px;  margin: auto; margin-bottom:5%;;margin-top: 10%; width:80%; text-align: center;">
+  <h1 style="margin-top: -1%;line-height: 20px;font-size: 35px;text-align: center;">
+    <span style="background-color:white; padding-left: 1%; padding-right: 1%;">Your Stats</span>
+  </h1>
+  <ngb-carousel>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <mat-card style="margin: auto; margin-top: 2%; text-align: center; width: 80%;">
+          <fusioncharts 
+          type="column2d"
+          width="700"
+          height="400"
+          dataFormat="json"
+          [dataSource]="bardatasource"
+          dataEmptyMessage="Chart is not compatible for the data">
+          </fusioncharts>
+        </mat-card>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <mat-card style="margin: auto; margin-top: 2%; text-align: center; width: 80%;">
+          <fusioncharts 
+          type="doughnut2d"
+          width="700"
+          height="400"
+          dataFormat="json"
+          [dataSource]="piedatasource"
+          dataEmptyMessage="Chart is not compatible for the data"
+          >
+          </fusioncharts>
+        </mat-card>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <mat-card style="margin: auto; margin-top: 2%; text-align: center; width: 80%;">
+          <fusioncharts
+          type="gantt"
+          width="700"
+          height="400"
+          dataFormat="json"
+          [dataSource]="ganttdatasource"
+          dataEmptyMessage="Chart is not compatible for the data">
+          </fusioncharts>
+        </mat-card>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
+
+  </mat-card>
+
+
+  <mat-card style="margin: auto; margin-top: 2%; text-align: center; width: 80%;">
+    <fusioncharts
+    type="gantt"
+    width="700"
+    height="400"
+    dataFormat="json"
+    [dataSource]="ganttdatasource"
+    dataEmptyMessage="Chart is not compatible for the data">
+    </fusioncharts>
   </mat-card>
 </div>
