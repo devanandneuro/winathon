@@ -11,7 +11,7 @@ import { FusionChartsModule } from 'angular-fusioncharts';
 
 // Import FusionCharts library and chart modules
 import * as FusionCharts from 'fusioncharts';
-import * as charts from 'fusioncharts/fusioncharts.charts';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -25,7 +25,11 @@ import { AuthGuard } from './service/auth.guard';
 import { LoginService } from './service/login.service';
 
 // Pass the fusioncharts library and chart modules
-FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
+Charts(FusionCharts);
+
+FusionTheme(FusionCharts);
+
+FusionChartsModule.fcRoot(FusionCharts);
 
 const appRoutes: Routes = [
   { path: '', redirectTo:'/start-page',  pathMatch: 'full'},
