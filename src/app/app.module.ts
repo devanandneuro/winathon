@@ -10,9 +10,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FusionChartsModule } from 'angular-fusioncharts';
 
 // Import FusionCharts library and chart modules
-import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
-import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import * as FusionCharts from "fusioncharts";
+import * as Widgets from "fusioncharts/fusioncharts.widgets.js";
+import * as Gantt from "fusioncharts/fusioncharts.gantt.js";
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
 
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,11 +28,8 @@ import { AuthGuard } from './service/auth.guard';
 import { LoginService } from './service/login.service';
 
 // Pass the fusioncharts library and chart modules
-Charts(FusionCharts);
+FusionChartsModule.fcRoot(FusionCharts, Widgets, Gantt, FusionTheme,Charts);
 
-FusionTheme(FusionCharts);
-
-FusionChartsModule.fcRoot(FusionCharts);
 
 const appRoutes: Routes = [
   { path: '', redirectTo:'/start-page',  pathMatch: 'full'},

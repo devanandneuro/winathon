@@ -8,12 +8,115 @@ import { DatePipe } from '@angular/common';
 import { LoginService } from './service/login.service';
 import { Subscription } from 'rxjs';
 
+
+const data = {
+  chart: {
+    dateformat: "mm/dd/yyyy",
+    caption: "Project Schedule for Operation BigHead",
+    subcaption: "",
+    theme: "fusion",
+    canvasborderalpha: "40",
+    ganttlinealpha: "50",
+    plottooltext: "$PercentComplete complete"
+  },
+  tasks: {
+    color: "#008000",
+    task: [
+      {
+        start: "01/01/2016",
+        end: "01/06/2016",
+        percentcomplete: "90",
+        height: "27%",
+        toppadding: "32%"
+      },
+      {
+        start: "01/05/2016",
+        end: "01/18/2016",
+        percentcomplete: "70",
+        height: "27%",
+        toppadding: "32%"
+      },
+      {
+        start: "01/15/2016",
+        end: "01/24/2016",
+        percentcomplete: "85",
+        height: "27%",
+        toppadding: "32%"
+      },
+      {
+        start: "01/28/2016",
+        end: "02/07/2017",
+        percentcomplete: "80",
+        height: "27%",
+        toppadding: "32%"
+      }
+    ]
+  },
+  processes: {
+    headertext: "Task",
+    headeralign: "left",
+    fontsize: "14",
+    isbold: "0",
+    align: "left",
+    process: [
+      {
+        label: "Finalize and Approve Plan"
+      },
+      {
+        label: "Prerpare Drawings"
+      },
+      {
+        label: "Analyze Potential Market"
+      },
+      {
+        label: "Write Specification"
+      }
+    ]
+  },
+  categories: [
+    {
+      category: [
+        {
+          start: "01/01/2016",
+          end: "01/10/2016",
+          label: "1-10 days"
+        },
+        {
+          start: "01/11/2016",
+          end: "01/20/2016",
+          label: "11-20 days"
+        },
+        {
+          start: "01/21/2016",
+          end: "01/30/2016",
+          label: "21-30 days"
+        },
+        {
+          start: "02/01/2016",
+          end: "02/10/2016",
+          label: "31-40 days"
+        }
+      ]
+    }
+  ]
+};
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent{
+
+
+  width = 600;
+  height = 400;
+  type = "gantt";
+  dataFormat = "json";
+  dataSource = data;
  
   title = 'winathon';
   isActive = true;
@@ -38,192 +141,7 @@ export class AppComponent{
 
 
       
-  dataSource = {
-    chart: {
-      dateformat: "mm/dd/yyyy",
-      caption: "Event Planning Process",
-      theme: "fusion",
-      canvasborderalpha: "40",
-      ganttlinealpha: "50"
-    },
-    tasks: {
-      color: "#5D62B5",
-      task: [
-        {
-          start: "03/07/2018",
-          end: "03/17/2018"
-        },
-        {
-          start: "03/14/2018",
-          end: "03/28/2018"
-        },
-        {
-          start: "03/15/2018",
-          end: "03/31/2018"
-        },
-        {
-          start: "04/02/2018",
-          end: "04/12/2018"
-        },
-        {
-          start: "04/12/2018",
-          end: "04/30/2018"
-        },
-        {
-          start: "04/20/2018",
-          end: "05/06/2018"
-        },
-        {
-          start: "04/30/2018",
-          end: "05/10/2018"
-        },
-        {
-          start: "04/30/2018",
-          end: "05/25/2018"
-        },
-        {
-          start: "05/04/2018",
-          end: "06/05/2018"
-        }
-      ]
-    },
-    processes: {
-      headertext: "Task",
-      headeralign: "left",
-      fontsize: "14",
-      isbold: "0",
-      align: "left",
-      process: [
-        {
-          label: "Define event goals"
-        },
-        {
-          label: "Source venue options"
-        },
-        {
-          label: "Finalize speaker reach out list"
-        },
-        {
-          label: "Compose sponsorship strategy"
-        },
-        {
-          label: "Reach out to sponsors"
-        },
-        {
-          label: "Create social media campaign"
-        },
-        {
-          label: "Reach out to blogs for backlinks"
-        },
-        {
-          label: "Optimize SEO ranking"
-        },
-        {
-          label: "Publish event lead up vlog series"
-        }
-      ]
-    },
-    categories: [
-      {
-        category: [
-          {
-            start: "03/05/2018",
-            end: "03/31/2018",
-            label: "March"
-          },
-          {
-            start: "04/01/2018",
-            end: "04/30/2018",
-            label: "April"
-          },
-          {
-            start: "05/01/2018",
-            end: "05/31/2018",
-            label: "May"
-          },
-          {
-            start: "06/01/2018",
-            end: "06/10/2018",
-            label: "June"
-          }
-        ]
-      },
-      {
-        category: [
-          {
-            start: "03/05/2018",
-            end: "03/11/2018",
-            label: "W 1"
-          },
-          {
-            start: "03/12/2018",
-            end: "03/18/2018",
-            label: "W 2"
-          },
-          {
-            start: "03/19/2018",
-            end: "03/25/2018",
-            label: "W 3"
-          },
-          {
-            start: "03/26/2018",
-            end: "04/01/2018",
-            label: "W 4"
-          },
-          {
-            start: "04/02/2018",
-            end: "04/08/2018",
-            label: "W 5"
-          },
-          {
-            start: "04/09/2018",
-            end: "04/15/2018",
-            label: "W 6"
-          },
-          {
-            start: "04/16/2018",
-            end: "04/22/2018",
-            label: "W 7"
-          },
-          {
-            start: "04/23/2018",
-            end: "04/29/2018",
-            label: "W 8"
-          },
-          {
-            start: "04/30/2018",
-            end: "05/06/2018",
-            label: "W 9"
-          },
-          {
-            start: "05/07/2018",
-            end: "05/13/2018",
-            label: "W 10"
-          },
-          {
-            start: "05/14/2018",
-            end: "05/20/2018",
-            label: "W 11"
-          },
-          {
-            start: "05/21/2018",
-            end: "05/27/2018",
-            label: "W 12"
-          },
-          {
-            start: "05/28/2018",
-            end: "06/03/2018",
-            label: "W 13"
-          },
-          {
-            start: "06/04/2018",
-            end: "06/10/2018",
-            label: "W 14"
-          }
-        ]
-      }
-    ]
-  };
+  
 
 
   constructor(private http: HttpClient,private datePipe : DatePipe,private router: Router,private loginService:LoginService) { 
